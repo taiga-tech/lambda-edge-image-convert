@@ -1,3 +1,5 @@
+[![CI](https://github.com/taiga-tech/lambda-edge-image-convert/actions/workflows/main.yml/badge.svg)](https://github.com/taiga-tech/lambda-edge-image-convert/actions/workflows/main.yml)
+
 クックパッド開発者ブログ (http://techlife.cookpad.com/entry/2018-05-25-lambda-edge) 用のサンプルコード
 
 |キー|値|デフォルト|最大値|補足|
