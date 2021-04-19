@@ -34,7 +34,7 @@ jobs:
 
       - name: packageInstall & test
         run: |
-          npm ci
+          npm install
           npm run local-run
 
       - name: create dist
