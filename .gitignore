@@ -5,3 +5,4 @@ app.zip
 npm-debug.log
 .DS_Store
 .vscode
+dist
