@@ -7,7 +7,7 @@
   "scripts": {
     "local-run": "NODE_ENV=local node localRun.js",
     "create-package": "zip -r ./app.zip ./src/ ./node_modules/ ./lib/",
-    "build": "cp -r ./src ./node_modules ./lib ./app/"
+    "build": "cp -r ./src ./node_modules ./lib ./dist/"
   },
   "dependencies": {
     "sharp": "^0.20.1"
