@@ -1,1 +1,0 @@
-EC2 等の Amazon Linux 上で `$ npm install sharp` し生成された `node_modules/sharp` ディレクトリを中身ごとここに配置してください。
