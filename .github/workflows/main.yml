@@ -32,10 +32,9 @@ jobs:
         with:
           node-version: 10.x
 
-      - name: packageInstall & test
+      - name: packageInstall
         run: |
           npm install
-          npm run local-run
 
       - name: create dist
         run: npm run build
