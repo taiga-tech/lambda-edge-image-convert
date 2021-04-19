@@ -39,7 +39,6 @@ jobs:
 
       - name: create dist
         run: npm run build
-        run: ls dist
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
