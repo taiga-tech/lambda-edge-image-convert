@@ -27,17 +27,10 @@ jobs:
       - name: create dist
         run: npm run create-package
 
-      # - name: Run a one-line script
-      #   run: echo Hello, world!
-
-      # - name: Run a multi-line script
-      #   run: |
-      #     echo Add other actions to build,
-      #     echo test, and deploy your project.
-
-      # - uses: actions/aws/cli@master
-      #   env:
-      #     AWS_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY_ID }}
-      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
-      #   with:
-      #     args: s3 sync app.zip/ s3://wedding-photo-api/lambda-edge-image-convert/ --delete
+      - name: lambda deploy
+        uses: actions/aws/cli@master
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
+        with:
+          args: s3 sync app.zip/ s3://wedding-photo-api/lambda-edge-image-convert/ --delete
