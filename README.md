@@ -46,8 +46,9 @@ Resize images in real time with AWS Lambda @ Edge & convert to WebP format
 - handler: /src/index.handler
 
 ## Todo
-- [ ] Automatic deployment with github actions
+- [x] Automatic deployment with github actions
 - [ ] Added format that can be converted
+- [ ] Describes how to install "sharp" on Amazon Linux
 
 ## References
 
