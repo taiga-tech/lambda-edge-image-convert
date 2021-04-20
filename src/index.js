@@ -111,13 +111,9 @@ exports.handler = (event, context, callback) => {
         response.headers['content-type'] = [
           { key: 'Content-Type', value: 'image/webp' },
         ]
-      } else if (metadata.format !== 'jpeg') {
+      } else {
         response.headers['content-type'] = [
-          { key: 'Content-Type', value: 'image/jpeg' },
-        ]
-      } else if(metadata.format !== 'png') {
-        response.headers['content-type'] = [
-          { key: 'Content-Type', value: 'image/jpeg' },
+          { key: 'Content-Type', value: `image/${metadata.format}` },
         ]
       }
       response.body = buffer.toString('base64')
