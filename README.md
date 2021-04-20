@@ -32,7 +32,7 @@ Resize images in real time with AWS Lambda @ Edge & convert to WebP format
 |p|t (true): WebP conversion, <br />f (false)：WebP conversion|f (false)|-|-|
 
 
-## command
+## Command
 
 ```shell
 % node -v # 10.x
@@ -40,7 +40,7 @@ Resize images in real time with AWS Lambda @ Edge & convert to WebP format
 % npm run create-package # create a zip package
 ```
 
-## lambda settings
+## Lambda Settings
 
 - runtine: node 10.x
 - handler: /src/index.handler
