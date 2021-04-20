@@ -1,15 +1,35 @@
+# lambda-edge-image-convert
+
 [![CI](https://github.com/taiga-tech/lambda-edge-image-convert/actions/workflows/main.yml/badge.svg)](https://github.com/taiga-tech/lambda-edge-image-convert/actions/workflows/main.yml)
 
-クックパッド開発者ブログ (http://techlife.cookpad.com/entry/2018-05-25-lambda-edge) 用のサンプルコード
+["COOKPAD" the sample code for developers blog was in reference](http://techlife.cookpad.com/entry/2018-05-25-lambda-edge/)
+Resize images in real time with AWS Lambda @ Edge & convert to WebP format
 
-|キー|値|デフォルト|最大値|補足|
+## Usage
+```html
+<img src="https://<cloudFrontUrl>/<S3_PATH>?<query>">
+
+<!-- format: webp, height: 200px -->
+<img src="https://d2eerjykv09g3.cloudfront.net/demo/img/demo_11.jpg?p=t&h=200">
+
+<!-- format: jpg, height: 100px -->
+<img src="https://d2eerjykv09g3.cloudfront.net/demo/img/demo_11.jpg?p=f&h=100">
+```
+## Demo
+
+- format: webp, height: 200px
+<img src="https://d2eerjykv09g3.cloudfront.net/demo/img/demo_11.jpg?p=t&h=200">
+- format: jpg, height: 100px
+<img src="https://d2eerjykv09g3.cloudfront.net/demo/img/demo_11.jpg?h=100">
+
+## Query
+
+|Key|Value|Delfault|Maximum|addition|
 |---|---|---|---|---|
-|w|最大横幅(ピクセル)を指定|1200|1200|変換元の画像より大きな値は無効(=拡大しない)|
-|h|最大縦幅(ピクセル)を指定|同上|同上|同上|
-|p|t (true)：WebP 形式へ変換するf (false)：WebP 形式へ変換しない|f (false)|-|-|
+|w|Maximum width(px)|1200|1200|Values larger than the source image are invalid|
+|h|Maximum hight(px)|1200|1200|same as above|
+|p|t (true): WebP conversion, <br />f (false)：WebP conversion|f (false)|-|-|
 
-- lamda: runtine node 10.x
-- handler: /src/index.handler
 
 ## command
 
@@ -19,5 +39,16 @@
 % npm run create-package # create a zip package
 ```
 
+## lambda settings
+- runtine: node 10.x
+- handler: /src/index.handler
 
-https://github.com/aws-actions/configure-aws-credentials
+## References
+
+- https://github.com/aws-actions/configure-aws-credentials
+- https://github.com/appleboy/lambda-action
+
+
+## Todo
+- [ ] Automatic deployment with github actions
+- [ ] Added format that can be converted
