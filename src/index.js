@@ -89,9 +89,9 @@ exports.handler = (event, context, callback) => {
     })
     .then((metadata) => {
       // 念のため拡張子だけでなく画像フォーマットをチェック
-      if (metadata.format !== 'jpeg') {
+      if (metadata.format !== 'jpeg' || metadata.format !== 'png') {
         return Promise.reject(
-          new FormatError('Original file format must be jpeg.')
+          new FormatError('Original file format must be jpeg or png.')
         )
       }
       // 引き伸ばしはしない
@@ -111,7 +111,11 @@ exports.handler = (event, context, callback) => {
         response.headers['content-type'] = [
           { key: 'Content-Type', value: 'image/webp' },
         ]
-      } else {
+      } else if (metadata.format !== 'jpeg') {
+        response.headers['content-type'] = [
+          { key: 'Content-Type', value: 'image/jpeg' },
+        ]
+      } else if(metadata.format !== 'png') {
         response.headers['content-type'] = [
           { key: 'Content-Type', value: 'image/jpeg' },
         ]
