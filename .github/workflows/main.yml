@@ -28,9 +28,12 @@ jobs:
         run: npm run create-package
 
       - name: lambda deploy
-        uses: actions/aws/cli@master
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
+        uses:  aws-actions/configure-aws-credentials@master
         with:
-          args: s3 sync app.zip/ s3://wedding-photo-api/lambda-edge-image-convert/ --delete
+          aws-access-key-id: ${{ secrets.S3_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.S3_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.S3_DEFAULT_REGION}}
+
+    - name: Copy files to the test website with the AWS CLI
+      run: |
+        aws s3 sync app.zip/ s3://wedding-photo-api/lambda-edge-image-convert/ --delete
