@@ -6,6 +6,7 @@
 Resize images in real time with AWS Lambda @ Edge & convert to WebP format
 
 ## Usage
+
 ```html
 <img src="https://<cloudFrontUrl>/<S3_PATH>?<query>">
 
@@ -40,15 +41,15 @@ Resize images in real time with AWS Lambda @ Edge & convert to WebP format
 ```
 
 ## lambda settings
+
 - runtine: node 10.x
 - handler: /src/index.handler
+
+## Todo
+- [ ] Automatic deployment with github actions
+- [ ] Added format that can be converted
 
 ## References
 
 - https://github.com/aws-actions/configure-aws-credentials
 - https://github.com/appleboy/lambda-action
-
-
-## Todo
-- [ ] Automatic deployment with github actions
-- [ ] Added format that can be converted
