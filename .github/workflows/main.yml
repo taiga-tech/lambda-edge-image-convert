@@ -36,4 +36,4 @@ jobs:
 
       - name: Copy files to the s3 with the AWS CLI
         run: |
-          aws s3 sync app.zip s3://wedding-photo-api/lambda-edge-image-convert/ --delete
+          aws s3 cp app.zip s3://wedding-photo-api/lambda-edge-image-convert/ --delete
