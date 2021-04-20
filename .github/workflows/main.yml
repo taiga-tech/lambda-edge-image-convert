@@ -27,24 +27,24 @@ jobs:
       - name: create package
         run: npm run create-package
 
-      # - name: lambda deploy
-      #   uses:  aws-actions/configure-aws-credentials@master
-      #   with:
-      #     aws-access-key-id: ${{ secrets.S3_ACCESS_KEY_ID }}
-      #     aws-secret-access-key: ${{ secrets.S3_SECRET_ACCESS_KEY }}
-      #     aws-region: ${{ secrets.S3_DEFAULT_REGION}}
-
-      # - name: Copy files to the s3 with the AWS CLI
-      #   run: |
-      #     aws s3 cp app.zip s3://wedding-photo-api/lambda-edge-image-convert/
-
-      - name: AWS Lambda Deploy
-        uses: appleboy/lambda-action@master
+      - name: lambda deploy
+        uses:  aws-actions/configure-aws-credentials@master
         with:
-          aws_access_key_id: ${{ secrets.S3_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.S3_SECRET_ACCESS_KEY }}
-          aws_region: ${{ secrets.S3_DEFAULT_REGION }}
-          function_name: lambda-edge-image-convert
-          zip_file: app.zip
-          dry_run: true
-          publish: true
+          aws-access-key-id: ${{ secrets.S3_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.S3_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.S3_DEFAULT_REGION}}
+
+      - name: Copy files to the s3 with the AWS CLI
+        run: |
+          aws s3 cp app.zip s3://wedding-photo-api/lambda-edge-image-convert/
+
+      # - name: AWS Lambda Deploy
+      #   uses: appleboy/lambda-action@master
+      #   with:
+      #     aws_access_key_id: ${{ secrets.S3_ACCESS_KEY_ID }}
+      #     aws_secret_access_key: ${{ secrets.S3_SECRET_ACCESS_KEY }}
+      #     aws_region: ${{ secrets.S3_DEFAULT_REGION }}
+      #     function_name: lambda-edge-image-convert
+      #     zip_file: app.zip
+      #     dry_run: true
+      #     publish: true
