@@ -18,3 +18,6 @@
 % npm i
 % npm run create-package # create a zip package
 ```
+
+
+https://github.com/aws-actions/configure-aws-credentials
