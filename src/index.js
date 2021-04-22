@@ -92,7 +92,7 @@ exports.handler = (event, context, callback) => {
       // 念のため拡張子だけでなく画像フォーマットをチェック
       if (metadata.format !== 'jpeg' || metadata.format !== 'png') {
         return Promise.reject(
-          new FormatError('Original file format must be jpeg or png.')
+          new FormatError(`Original file format must be jpeg or png.->${metadata.format}`)
         )
       }
       // 引き伸ばしはしない
