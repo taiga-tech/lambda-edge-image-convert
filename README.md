@@ -47,7 +47,8 @@ Resize images in real time with AWS Lambda @ Edge & convert to WebP format
 
 ## Todo
 - [x] Automatic deployment with github actions
-- [ ] Added format that can be converted
+- [x] Added format that can be converted
+- [ ] support for png, but still worried so will fix it.
 - [ ] Describes how to install "sharp" on Amazon Linux
 
 ## References
