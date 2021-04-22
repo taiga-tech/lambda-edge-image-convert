@@ -28,7 +28,8 @@ exports.handler = (event, context, callback) => {
   options.filePath = decodeURIComponent(request.uri)
 
   const ext = options.filePath.split('.')[1]
-  if ((ext !== 'jpg' && ext !== 'jpeg') || ext !== 'png') {
+  // 条件分岐か正規表現を考える
+  if (ext !== 'jpg' && ext !== 'jpeg' && ext !== 'png') {
     responseOriginal()
     return
   }
