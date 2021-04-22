@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/taiga-tech/lambda-edge-image-convert/actions/workflows/main.yml/badge.svg)](https://github.com/taiga-tech/lambda-edge-image-convert/actions/workflows/main.yml)
 
-["COOKPAD" the sample code for developers blog was in reference](http://techlife.cookpad.com/entry/2018-05-25-lambda-edge/)
+["COOKPAD" the sample code for developers blog was in reference](http://techlife.cookpad.com/entry/2018-05-25-lambda-edge)
 Resize images in real time with AWS Lambda @ Edge & convert to WebP format
 
 ## Usage
