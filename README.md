@@ -29,7 +29,7 @@ Resize images in real time with AWS Lambda @ Edge & convert to WebP format
 |---|---|---|---|---|
 |w|Maximum width(px)|1200|1200|Values larger than the source image are invalid|
 |h|Maximum hight(px)|1200|1200|same as above|
-|p|t (true): WebP conversion, <br />f (false)：WebP conversion|f (false)|-|-|
+|p|t (true): WebP conversion, <br />f (false): WebP conversion|f (false)|-|-|
 
 
 ## Command
