@@ -101,6 +101,7 @@ exports.handler = (event, context, callback) => {
 
       // フォーマットチェックが通ったら変数に格納して、下使う
       format = metadata.format
+
       // 引き伸ばしはしない
       options.width =
         metadata.width < options.width ? metadata.width : options.width
@@ -120,7 +121,7 @@ exports.handler = (event, context, callback) => {
         ]
       } else {
         response.headers['content-type'] = [
-          { key: 'Content-Type', value: `image/${format}` },
+          { key: 'Content-Type', value: `image/png` },
         ]
       }
       response.body = buffer.toString('base64')
