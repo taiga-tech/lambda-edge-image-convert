@@ -77,6 +77,9 @@ exports.handler = (event, context, callback) => {
   }
   if (query.p === 't' || query.p === 'true') {
     options.webp = true
+  } else {
+    responseOriginal()
+    return
   }
 
   let format = ''
@@ -121,7 +124,7 @@ exports.handler = (event, context, callback) => {
         ]
       } else {
         response.headers['content-type'] = [
-          { key: 'Content-Type', value: `image/png` },
+          { key: 'Content-Type', value: `image/${format}` },
         ]
       }
       response.body = buffer.toString('base64')
