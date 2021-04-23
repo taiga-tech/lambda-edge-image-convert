@@ -28,8 +28,9 @@ exports.handler = (event, context, callback) => {
   options.filePath = decodeURIComponent(request.uri)
 
   const ext = options.filePath.split('.')[1]
-  // 条件分岐か正規表現を考える
-  if (ext !== 'jpg' && ext !== 'jpeg') {
+  // 条件分岐か正規表現を考える ext.match(/\(jpe?g|png)$/)
+  // if (ext !== 'jpg' && ext !== 'jpeg') {
+  if (!ext.match('png|jpg|jpeg')) {
     responseOriginal()
     return
   }
@@ -90,9 +91,10 @@ exports.handler = (event, context, callback) => {
     })
     .then((metadata) => {
       // 念のため拡張子だけでなく画像フォーマットをチェック
-      if (metadata.format !== 'jpeg') {
+      // if (metadata.format !== 'jpeg') {
+      if (!metadata.format.match('jpeg|png')) {
         return Promise.reject(
-          new FormatError('Original file format must be jpeg.')
+          new FormatError('Original file format must be jpeg or png.')
         )
       }
       // 引き伸ばしはしない
