@@ -29,7 +29,7 @@ exports.handler = (event, context, callback) => {
 
   const ext = options.filePath.split('.')[1]
   // 条件分岐か正規表現を考える
-  if (ext !== 'jpg' && ext !== 'jpeg' && ext !== 'png') {
+  if (ext !== 'jpg' && ext !== 'jpeg') {
     responseOriginal()
     return
   }
@@ -90,9 +90,9 @@ exports.handler = (event, context, callback) => {
     })
     .then((metadata) => {
       // 念のため拡張子だけでなく画像フォーマットをチェック
-      if (metadata.format !== 'jpeg' && metadata.format !== 'png') {
+      if (metadata.format !== 'jpeg') {
         return Promise.reject(
-          new FormatError(`${metadata.format} -> Original file format must be jpeg or png.`)
+          new FormatError('Original file format must be jpeg.')
         )
       }
       // 引き伸ばしはしない
@@ -114,7 +114,7 @@ exports.handler = (event, context, callback) => {
         ]
       } else {
         response.headers['content-type'] = [
-          { key: 'Content-Type', value: `image/${metadata.format}` },
+          { key: 'Content-Type', value: `image/jpeg` },
         ]
       }
       response.body = buffer.toString('base64')
