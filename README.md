@@ -20,9 +20,9 @@ Resize images in real time with AWS Lambda @ Edge & convert to WebP format
 ## Demo
 
 - format: webp, height: 200px
-<img src="https://d2eerjykv09g3.cloudfront.net/demo/img/demo_11.jpg?p=t&h=200">
+<img src="https://cdn.takahiro-and-michika.com/demo/img/demo_11.jpg?p=t&h=200">
 <!-- - format: jpg, height: 100px
-<img src="https://d2eerjykv09g3.cloudfront.net/demo/img/demo_11.jpg?p=t&h=100"> -->
+<img src="https://cdn.takahiro-and-michika.com/demo/img/demo_11.jpg?p=t&h=100"> -->
 
 ## Query
 
