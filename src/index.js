@@ -28,25 +28,30 @@ exports.handler = (event, context, callback) => {
   options.filePath = decodeURIComponent(request.uri)
 
   const ext = options.filePath.split('.')[1]
-  // 条件分岐か正規表現を考える ext.match(/\(jpe?g|png)$/)
+
+  // 条件分岐か正規表現を考える
   // if (ext !== 'jpg' && ext !== 'jpeg') {
-  if (!ext.match('png|jpg|jpeg')) {
+  if (!ext.match('jpe?g|png')) {
+    // マッチしなかったらオリジナルを返す
     responseOriginal()
     return
   }
 
   if (response.status === '304') {
+    // ステータスが304だったらオリジナルを返す
     responseOriginal()
     return
   }
 
   if (response.status !== '200') {
+    // ステータスが200意外だと404を返す。
     responseNotFound()
     return
   }
 
   // クエリ文字列のパース
   const query = querystring.parse(request.querystring)
+
   if (query.w) {
     const width = parseInt(query.w)
     if (!isNumber(width)) {
@@ -61,6 +66,7 @@ exports.handler = (event, context, callback) => {
     }
     options.width = width
   }
+
   if (query.h) {
     const height = parseInt(query.h)
     if (!isNumber(height)) {
@@ -75,14 +81,17 @@ exports.handler = (event, context, callback) => {
     }
     options.height = height
   }
-  if (query.p === 't' || query.p === 'true') {
+
+  if (query.p.match('t|true')) {
     options.webp = true
-  } else {
-    responseOriginal()
-    return
   }
 
-  let format = ''
+  // else {
+  //   responseOriginal()
+  //   return
+  // }
+
+  let format
   let sharpBody
   s3.getObject({
     Bucket: BUCKET,
@@ -96,14 +105,14 @@ exports.handler = (event, context, callback) => {
     .then((metadata) => {
       // 念のため拡張子だけでなく画像フォーマットをチェック
       // if (metadata.format !== 'jpeg') {
-      if (!metadata.format.match('jpeg|png')) {
+      if (!metadata.format.match('jpe?g|png')) {
         return Promise.reject(
           new FormatError('Original file format must be jpeg or png.')
         )
       }
 
       // フォーマットチェックが通ったら変数に格納して、下使う
-      format = metadata.format
+      format = metadata.format // これが下のthenに行ってないかも
 
       // 引き伸ばしはしない
       options.width =
@@ -117,6 +126,7 @@ exports.handler = (event, context, callback) => {
       return sharpBody.rotate().toBuffer()
     })
     .then((buffer) => {
+      console.log(format)
       response.status = '200'
       if (options.webp) {
         response.headers['content-type'] = [
