@@ -10,6 +10,6 @@
     "build": "cp -r ./src ./node_modules ./lib ./dist/"
   },
   "dependencies": {
-    "sharp": "^0.20.1"
+    "sharp": "^0.28.3"
   }
 }
