@@ -21,16 +21,17 @@ Resize images in real time with AWS Lambda @ Edge & convert to WebP format
 
 - format: webp, height: 200px
 <img src="https://cdn.takahiro-and-michika.com/demo/img/demo_11.jpg?p=t&h=200">
-<!-- - format: jpg, height: 100px
-<img src="https://cdn.takahiro-and-michika.com/demo/img/demo_11.jpg?p=t&h=100"> -->
+
+- format: jpg, height: 100px
+<img src="https://cdn.takahiro-and-michika.com/demo/img/demo_11.jpg?p=t&h=100">
 
 ## Query
 
-|Key|Value|Delfault|Maximum|addition|
-|---|---|---|---|---|
-|w|Maximum width(px)|1200|1200|Values larger than the source image are invalid|
-|h|Maximum hight(px)|1200|1200|same as above|
-|p|t (true): WebP conversion, <br />f (false): WebP conversion|f (false)|-|-|
+| Key | Value                                                       | Delfault  | Maximum | addition                                        |
+| --- | ----------------------------------------------------------- | --------- | ------- | ----------------------------------------------- |
+| w   | Maximum width(px)                                           | 1200      | 1200    | Values larger than the source image are invalid |
+| h   | Maximum hight(px)                                           | 1200      | 1200    | same as above                                   |
+| p   | t (true): WebP conversion, <br />f (false): WebP conversion | f (false) | -       | -                                               |
 
 
 ## Command
