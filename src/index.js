@@ -77,9 +77,6 @@ exports.handler = (event, context, callback) => {
   }
   if (query.p === 't' || query.p === 'true') {
     options.webp = true
-  } else {
-    responseOriginal()
-    return
   }
 
   let format = ''
