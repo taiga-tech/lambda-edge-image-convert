@@ -18,6 +18,7 @@ const MAX_HEIGHT = 1200
 exports.handler = (event, context, callback) => {
   const { request, response } = event.Records[0].cf
 
+  // Default
   const options = {
     filePath: '',
     width: MAX_WIDTH,
@@ -44,7 +45,7 @@ exports.handler = (event, context, callback) => {
   }
 
   if (response.status !== '200') {
-    // ステータスが200意外だと404を返す。
+    // ステータスが200意外だと404を返す
     responseNotFound()
     return
   }
@@ -86,11 +87,6 @@ exports.handler = (event, context, callback) => {
     options.webp = true
   }
 
-  // else {
-  //   responseOriginal()
-  //   return
-  // }
-
   let format
   let sharpBody
   s3.getObject({
@@ -110,9 +106,8 @@ exports.handler = (event, context, callback) => {
           new FormatError('Original file format must be jpeg or png.')
         )
       }
-
-      // フォーマットチェックが通ったら変数に格納して、下使う
-      format = metadata.format // これが下のthenに行ってないかも
+      // フォーマットチェックが通ったら変数に格納
+      format = metadata.format
 
       // 引き伸ばしはしない
       options.width =
@@ -120,13 +115,13 @@ exports.handler = (event, context, callback) => {
       options.height =
         metadata.height < options.height ? metadata.height : options.height
       sharpBody.resize(options.width, options.height).max()
+
       if (options.webp) {
         sharpBody.webp()
       }
       return sharpBody.rotate().toBuffer()
     })
     .then((buffer) => {
-      console.log(format)
       response.status = '200'
       if (options.webp) {
         response.headers['content-type'] = [
