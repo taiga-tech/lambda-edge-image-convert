@@ -18,7 +18,6 @@ const MAX_HEIGHT = 1200
 exports.handler = (event, context, callback) => {
   const { request, response } = event.Records[0].cf
 
-  // Default
   const options = {
     filePath: '',
     width: MAX_WIDTH,
@@ -29,30 +28,25 @@ exports.handler = (event, context, callback) => {
   options.filePath = decodeURIComponent(request.uri)
 
   const ext = options.filePath.split('.')[1]
-
-  // 条件分岐か正規表現を考える
+  // 条件分岐か正規表現を考える ext.match(/\(jpe?g|png)$/)
   // if (ext !== 'jpg' && ext !== 'jpeg') {
-  if (!ext.match('jpe?g|png')) {
-    // マッチしなかったらオリジナルを返す
+  if (!ext.match('png|jpg|jpeg')) {
     responseOriginal()
     return
   }
 
   if (response.status === '304') {
-    // ステータスが304だったらオリジナルを返す
     responseOriginal()
     return
   }
 
   if (response.status !== '200') {
-    // ステータスが200意外だと404を返す
     responseNotFound()
     return
   }
 
   // クエリ文字列のパース
   const query = querystring.parse(request.querystring)
-
   if (query.w) {
     const width = parseInt(query.w)
     if (!isNumber(width)) {
@@ -67,7 +61,6 @@ exports.handler = (event, context, callback) => {
     }
     options.width = width
   }
-
   if (query.h) {
     const height = parseInt(query.h)
     if (!isNumber(height)) {
@@ -82,12 +75,14 @@ exports.handler = (event, context, callback) => {
     }
     options.height = height
   }
-
-  if (query.p.match('t|true')) {
+  if (query.p === 't' || query.p === 'true') {
     options.webp = true
+  } else {
+    responseOriginal()
+    return
   }
 
-  let format
+  let format = ''
   let sharpBody
   s3.getObject({
     Bucket: BUCKET,
@@ -101,12 +96,13 @@ exports.handler = (event, context, callback) => {
     .then((metadata) => {
       // 念のため拡張子だけでなく画像フォーマットをチェック
       // if (metadata.format !== 'jpeg') {
-      if (!metadata.format.match('jpe?g|png')) {
+      if (!metadata.format.match('jpeg|png')) {
         return Promise.reject(
           new FormatError('Original file format must be jpeg or png.')
         )
       }
-      // フォーマットチェックが通ったら変数に格納
+
+      // フォーマットチェックが通ったら変数に格納して、下使う
       format = metadata.format
 
       // 引き伸ばしはしない
@@ -115,7 +111,6 @@ exports.handler = (event, context, callback) => {
       options.height =
         metadata.height < options.height ? metadata.height : options.height
       sharpBody.resize(options.width, options.height).max()
-
       if (options.webp) {
         sharpBody.webp()
       }
