@@ -1,4 +1,4 @@
-// Copyright 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020 Lovell Fuller and contributors.
+// Copyright 2013, 2014, 2015, 2016, 2017 Lovell Fuller and contributors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 #define SRC_METADATA_H_
 
 #include <string>
-#include <napi.h>
+#include <nan.h>
 
 #include "./common.h"
 
@@ -31,17 +31,6 @@ struct MetadataBaton {
   int channels;
   std::string depth;
   int density;
-  std::string chromaSubsampling;
-  bool isProgressive;
-  int paletteBitDepth;
-  int pages;
-  int pageHeight;
-  int loop;
-  std::vector<int> delay;
-  int pagePrimary;
-  std::string compression;
-  std::vector<std::pair<int, int>> levels;
-  int subifds;
   bool hasProfile;
   bool hasAlpha;
   int orientation;
@@ -53,8 +42,6 @@ struct MetadataBaton {
   size_t iptcLength;
   char *xmp;
   size_t xmpLength;
-  char *tifftagPhotoshop;
-  size_t tifftagPhotoshopLength;
   std::string err;
 
   MetadataBaton():
@@ -63,13 +50,6 @@ struct MetadataBaton {
     height(0),
     channels(0),
     density(0),
-    isProgressive(false),
-    paletteBitDepth(0),
-    pages(0),
-    pageHeight(0),
-    loop(-1),
-    pagePrimary(-1),
-    subifds(0),
     hasProfile(false),
     hasAlpha(false),
     orientation(0),
@@ -80,11 +60,9 @@ struct MetadataBaton {
     iptc(nullptr),
     iptcLength(0),
     xmp(nullptr),
-    xmpLength(0),
-    tifftagPhotoshop(nullptr),
-    tifftagPhotoshopLength(0) {}
+    xmpLength(0) {}
 };
 
-Napi::Value metadata(const Napi::CallbackInfo& info);
+NAN_METHOD(metadata);
 
 #endif  // SRC_METADATA_H_
