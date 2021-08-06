@@ -22,7 +22,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@master
         with:
-          node-version: 14.x
+          node-version: 10.x
 
       - name: package Install
         run: npm install
