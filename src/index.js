@@ -41,7 +41,8 @@ exports.handler = (event, context, callback) => {
   }
 
   if (response.status !== '200') {
-    responseNotFound()
+    console.log('status: ', response.status)
+    responseNotFound(response.status)
     return
   }
 
@@ -82,7 +83,7 @@ exports.handler = (event, context, callback) => {
     return
   }
 
-  let format = ''
+  let format
   let sharpBody
   s3.getObject({
     Bucket: BUCKET,
@@ -136,14 +137,15 @@ exports.handler = (event, context, callback) => {
         responseError(error.message)
         return
       }
-      responseNotFound()
+      responseNotFound(error)
     })
 
   function responseOriginal() {
     callback(null, response)
   }
 
-  function responseNotFound() {
+  function responseNotFound(error) {
+    console.error(error);
     response.status = '404'
     response.headers['content-type'] = [
       { key: 'Content-Type', value: 'text/plain' },
