@@ -1,6 +1,5 @@
 'use strict'
 
-
 const aws = require('aws-sdk')
 const s3 = new aws.S3()
 const querystring = require('querystring')
@@ -24,6 +23,8 @@ exports.handler = (event, context, callback) => {
     width: MAX_WIDTH,
     height: MAX_HEIGHT,
     webp: false,
+    fit: sharp.fit.inside,
+    // position: sharp.strategy.entropy
   }
 
   options.filePath = decodeURIComponent(request.uri)
@@ -113,7 +114,11 @@ exports.handler = (event, context, callback) => {
         metadata.width < options.width ? metadata.width : options.width
       options.height =
         metadata.height < options.height ? metadata.height : options.height
-      sharpBody.resize(options.width, options.height) //.max()
+      sharpBody.resize(
+        options
+        // options.width,
+        // options.height,
+      ) //.max()
       if (options.webp) {
         sharpBody.webp()
       }
