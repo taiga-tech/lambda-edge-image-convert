@@ -112,7 +112,7 @@ exports.handler = (event, context, callback) => {
         metadata.width < options.width ? metadata.width : options.width
       options.height =
         metadata.height < options.height ? metadata.height : options.height
-      sharpBody.resize(options.width, options.height).max()
+      sharpBody.resize(options.width, options.height) //.max()
       if (options.webp) {
         sharpBody.webp()
       }
