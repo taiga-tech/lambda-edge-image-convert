@@ -1,5 +1,7 @@
 # lambda-edge-image-convert
 
+<!-- https://github.com/lambci/docker-lambda -->
+
 [![CI](https://github.com/taiga-tech/lambda-edge-image-convert/actions/workflows/main.yml/badge.svg)](https://github.com/taiga-tech/lambda-edge-image-convert/actions/workflows/main.yml)
 
 ["COOKPAD" the sample code for developers blog was in reference](http://techlife.cookpad.com/entry/2018-05-25-lambda-edge)
@@ -37,21 +39,21 @@ Resize images in real time with AWS Lambda @ Edge & convert to WebP format
 ## Command
 
 ```shell
-% node -v # 10.x
+% node -v # 14.x
 % npm i
 % npm run create-package # create a zip package
 ```
 
 ## Lambda Settings
 
-- runtine: node 10.x
+- runtine: node 14.x
 - handler: /src/index.handler
 
 ## Todo
 - [x] Automatic deployment with github actions
 - [x] Added format that can be converted
-- [ ] support for png, but still worried so will fix it.
-- [ ] Describes how to install "sharp" on Amazon Linux
+- [x] support for png, but still worried so will fix it.
+- [ ] Describes how to install "sharp" on Amazon Linux 2
 
 ## References
 
