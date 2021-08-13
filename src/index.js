@@ -81,10 +81,6 @@ exports.handler = (event, context, callback) => {
   if (query.p === 't' || query.p === 'true') {
     options.webp = true
   }
-  // else {
-  //   responseOriginal()
-  //   return
-  // }
 
   let format
   let sharpBody
@@ -114,11 +110,7 @@ exports.handler = (event, context, callback) => {
         metadata.width < options.width ? metadata.width : options.width
       options.height =
         metadata.height < options.height ? metadata.height : options.height
-      sharpBody.resize(
-        options
-        // options.width,
-        // options.height,
-      ) //.max()
+      sharpBody.resize(options)
       if (options.webp) {
         sharpBody.webp()
       }
