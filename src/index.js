@@ -3,13 +3,14 @@
 const aws = require('aws-sdk')
 const s3 = new aws.S3()
 const querystring = require('querystring')
+const sharp = require('sharp')
 
-let sharp
-if (process.env.NODE_ENV === 'local') {
-  sharp = require('sharp')
-} else {
-  sharp = require('../lib/sharp')
-}
+// let sharp
+// if (process.env.NODE_ENV === 'local') {
+//   sharp = require('sharp')
+// } else {
+//   sharp = require('../lib/sharp')
+// }
 
 const BUCKET = 'wedding-photo-api' // S3 のバケット名
 const MAX_WIDTH = 1200
@@ -23,8 +24,6 @@ exports.handler = (event, context, callback) => {
     width: MAX_WIDTH,
     height: MAX_HEIGHT,
     webp: false,
-    fit: sharp.fit.inside,
-    // position: sharp.strategy.entropy
   }
 
   options.filePath = decodeURIComponent(request.uri)
@@ -43,7 +42,6 @@ exports.handler = (event, context, callback) => {
   }
 
   if (response.status !== '200') {
-    console.log('status: ', response.status)
     responseNotFound(response.status)
     return
   }
@@ -110,7 +108,13 @@ exports.handler = (event, context, callback) => {
         metadata.width < options.width ? metadata.width : options.width
       options.height =
         metadata.height < options.height ? metadata.height : options.height
-      sharpBody.resize(options)
+
+      sharpBody.resize(
+        options.width,
+        options.height,
+        { fit: sharp.fit.inside }
+      )
+
       if (options.webp) {
         sharpBody.webp()
       }
@@ -136,15 +140,14 @@ exports.handler = (event, context, callback) => {
         responseError(error.message)
         return
       }
-      responseNotFound(error)
+      responseNotFound()
     })
 
   function responseOriginal() {
     callback(null, response)
   }
 
-  function responseNotFound(error) {
-    console.error(error);
+  function responseNotFound() {
     response.status = '404'
     response.headers['content-type'] = [
       { key: 'Content-Type', value: 'text/plain' },
