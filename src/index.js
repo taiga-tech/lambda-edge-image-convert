@@ -48,6 +48,10 @@ exports.handler = (event, context, callback) => {
 
   // クエリ文字列のパース
   const query = querystring.parse(request.querystring)
+  if (!query) {
+    responseOriginal()
+    return
+  }
   if (query.w) {
     const width = parseInt(query.w)
     if (!isNumber(width)) {
