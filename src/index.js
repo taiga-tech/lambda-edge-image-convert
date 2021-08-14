@@ -62,6 +62,7 @@ exports.handler = (event, context, callback) => {
     }
     options.width = width
   }
+
   if (query.h) {
     const height = parseInt(query.h)
     if (!isNumber(height)) {
@@ -108,7 +109,6 @@ exports.handler = (event, context, callback) => {
         metadata.width < options.width ? metadata.width : options.width
       options.height =
         metadata.height < options.height ? metadata.height : options.height
-
       sharpBody.resize(
         options.width,
         options.height,
