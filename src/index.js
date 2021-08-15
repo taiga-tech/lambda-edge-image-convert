@@ -48,7 +48,7 @@ exports.handler = (event, context, callback) => {
 
   // クエリ文字列のパース
   const query = querystring.parse(request.querystring)
-  if (!query || query.p === 'f' || query.p === 'false') {
+  if (!query.p || query.p === 'f' || query.p === 'false') {
     responseOriginal()
     return
   }
